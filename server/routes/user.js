@@ -8,6 +8,6 @@ const images = require('../middlewares/images')
 /* GET home page. */
 router.post('/signin', userController.signIn);
 router.post('/signup', userController.signUp);
-router.put('/:id', auth, userAuthor, images.multer.single('images'), images.uploadCloudinari, userController.updateUser)
+router.put('/:id', auth, userAuthor, images.multer.single('image'), images.uploadCloudinari, userController.updateUser)
 
 module.exports = router;

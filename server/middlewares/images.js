@@ -3,11 +3,13 @@ require('dotenv').config()
 var cloudinary = require('cloudinary').v2;
 
 const uploadCloudinari = (req, res, next) => {
+  console.log(req.file)
   if (!req.file) {
     return next()
   }
   cloudinary.uploader.upload_stream( {folder: "mpritter/"}, (error, result) => {
     req.photolink = result.url
+    console.log(req.photolink, '>>>>')
     next()
   })
   .end( req.file.buffer )

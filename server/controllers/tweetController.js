@@ -7,7 +7,8 @@ class TweetController {
       author: req.decoded.userId,
       hashtag: req.body.hashtag
     }
-    Tweet.create(data)
+    console.log(newTweet)
+    Tweet.create(newTweet)
       .then( data => {
         res.status(200).json({
           message: 'Success',
@@ -52,14 +53,17 @@ class TweetController {
       })
   }
   static readHashtag (req, res) {
-    Tweet.find({'hashtag': { $in: req.query.hashtag}}).populate('author').exec()
+    console.log('Masuk', req.body.hashtag)
+    Tweet.find({'hashtag': { '$in': [req.body.hashtag]}}).populate('author').exec()
       .then(tweet => {
+        console.log(tweet, '<<<')
           res.status(200).json({
           message: 'Success',
           data: tweet
         })
       })
       .catch(error=>{
+        console.log(error)
         res.status(400).json({
           message: 'Error',
           error: error

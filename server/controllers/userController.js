@@ -1,4 +1,6 @@
 const User = require('../models/userModel')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 class UserController {
   static signIn(req, res){
@@ -24,7 +26,8 @@ class UserController {
               token: token,
               userId : user[0]._id,
               username: user[0].username,
-              photo: user[0].photo
+              photo: user[0].photo,
+              email: user[0].email
             })
           }
         })
@@ -55,6 +58,7 @@ class UserController {
   static updateUser(req,res){
     User.find({'_id': req.params.id})
     .then(user => {
+      console.log(req.photolink)
       let updateUser = {
         email: req.body.email || user[0].email,
         photo: req.photolink || user[0].photo,
@@ -63,7 +67,7 @@ class UserController {
       .then((data)=>{
         res.status(200).json({
             message: 'Success',
-            data: data,
+            data: updateUser,
           })
       })
       .catch(error=> {
