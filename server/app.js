@@ -11,7 +11,7 @@ require('dotenv').config();
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_SERVER);
 
-const user = require('./routes/auth');
+const user = require('./routes/user');
 const tweet = require('./routes/tweet');
 
 const app = express();

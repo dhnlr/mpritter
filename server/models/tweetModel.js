@@ -15,9 +15,12 @@ const TweetSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
-  }
+  },
+  hashtag: [{
+      type: String
+  }]
 })
 
-const Tweet = mongoose.model('Tweet', UserSchema);
+const Tweet = mongoose.model('Tweet', TweetSchema);
 
 module.exports = Tweet
